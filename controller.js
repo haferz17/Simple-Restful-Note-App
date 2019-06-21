@@ -69,6 +69,7 @@ exports.updateNote = function(req,res){
     let note = req.body.note;
     let time = moment().format('YYYY-MM-DD HH:mm:ss');
     let categoryId = req.body.categoryId;
+    
     db.query(`UPDATE notes SET title=?,note=?,time=?,category_id=? WHERE id=?`,[title,note,time,categoryId,id],(err,rows,field)=>{
         if(err) throw err;
         else{
@@ -84,6 +85,7 @@ exports.updateNote = function(req,res){
 exports.updateCategory = function(req,res){
     let id = req.params.id;
     let name = req.body.name;
+
     db.query(`UPDATE categories SET name=? WHERE id=?`,[name,id],(err,rows,field)=>{
         if(err) throw err;
         else{
