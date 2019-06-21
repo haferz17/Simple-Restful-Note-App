@@ -6,13 +6,7 @@ require('dotenv/config');
 const port = process.env.PORT || 8000;
 const app = express();
 
-app.use(bodyParser.urlencoded({
-    extended: true,
-}));
-
-app.use(bodyParser.json())
-
-var whitelist = ['http://192.168.6.195']
+var whitelist = ['http://192.168.6.195','http://192.168.6.180']
 var corsOption = { 
     origin: function(origin,callback){
         if(whitelist.indexOf(origin)!== -1){
@@ -26,8 +20,14 @@ var corsOption = {
 
 app.use(cors())
 
+app.use(bodyParser.urlencoded({
+    extended: true,
+}));
+
+app.use(bodyParser.json())
+
 routes(app);
 
 app.listen(port);
 
-console.log('Running on 3000');
+console.log('Running on 4000');
