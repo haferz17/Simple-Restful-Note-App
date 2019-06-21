@@ -16,8 +16,6 @@ exports.viewNotes = function(req,res){
     let page = req.query.page || 1
     if(page=='0'){page = '1'}
     let offset = (page-1)*limit
-    let limit2 = parseInt(limit)
-    let page2 = parseInt(page)
  
     var sql = `SELECT notes.id,notes.title,notes.note,notes.time,categories.name AS category FROM notes INNER JOIN categories ON notes.category_id=categories.id 
     WHERE title LIKE '%${search}%' ORDER BY time ${sort} LIMIT ${limit} OFFSET ${offset}`
@@ -27,7 +25,7 @@ exports.viewNotes = function(req,res){
         if(err) throw err;
         else{
             db.query(query,(err,row,field)=>{
-                response.ok(row,page2,limit2,rows,res);
+                response.ok(row,parseInt(page),parseInt(limit),rows,res);
             })
         }
     })
@@ -69,7 +67,7 @@ exports.updateNote = function(req,res){
     let id = req.params.id;
     let title = req.body.title;
     let note = req.body.note;
-    let time = req.body.time;
+    let time = moment().format('YYYY-MM-DD HH:mm:ss');
     let categoryId = req.body.categoryId;
     db.query(`UPDATE notes SET title=?,note=?,time=?,category_id=? WHERE id=?`,[title,note,time,categoryId,id],(err,rows,field)=>{
         if(err) throw err;
