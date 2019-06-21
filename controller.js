@@ -17,7 +17,7 @@ exports.viewNotes = function(req,res){
     if(page=='0'){page = '1'}
     let offset = (page-1)*limit
  
-    var sql = `SELECT notes.id,notes.title,notes.note,notes.time,categories.name AS category FROM notes INNER JOIN categories ON notes.category_id=categories.id 
+    var sql = `SELECT notes.id,title,note,time,categories.name AS category FROM notes INNER JOIN categories ON notes.category_id=categories.id 
     WHERE title LIKE '%${search}%' ORDER BY time ${sort} LIMIT ${limit} OFFSET ${offset}`
     var query = `select * from notes`
     
