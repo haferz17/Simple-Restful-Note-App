@@ -3,7 +3,6 @@
 const response = require('./response');
 const db = require('./connect');
 const moment = require('moment');
-const isEmpty = require('lodash.isempty');
 
 // Welcome
 exports.welcome = function(req,res){
